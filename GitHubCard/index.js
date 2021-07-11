@@ -1,8 +1,19 @@
+import axios from 'axios'
+
 /*
   STEP 1: using axios, send a GET request to the following URL
     (replacing the placeholder with your Github name):
     https://api.github.com/users/<your name>
 */
+const githubURL = 'https://api.github.com/users/spearoxi'
+
+function userGitHub (githubURL){
+axios.get(githubURL)
+  .then(response => console.log(response.data))
+  .catch(err => console.log(err.message))
+  .finally(() => console.log('done'))
+}
+
 
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
@@ -50,6 +61,46 @@ const followersArray = [];
     </div>
 */
 
+function githubCard (gitObject) {
+  const card = document.createElement('div')
+  const userImage = document.createElement('img')
+  const cardInfo = document.createElement('div')
+  const name = document.createElement('h3')
+  const username = document.createElement('p')
+  const location = document.createElement('p')
+  const profile = document.createElement('p')
+  const pageAddress = document.createElement('a')
+  const followers = document.createElement('p')
+  const following = document.createElement('p')
+  const bio = document.createElement('p')
+
+  userImage.appendChild(card)
+  cardInfo.appendChild(card)
+  name.appendChild(cardInfo)
+  username.appendChild(cardInfo)
+  location.appendChild(cardInfo)
+  profile.appendChild(cardInfo)
+  pageAddress.appendChild(profile)
+  followers.appendChild(cardInfo)
+  following.appendChild(cardInfo)
+  bio.appendChild(cardInfo)
+
+  card.classList.add('card')
+  cardInfo.classList.add('card-info')
+  name.classList.add('name')
+  username.classList.add('username')
+
+  userImage.src = `${gitObject.avatar_url}`
+  name.textContent = `${gitObject.name}`
+  username.textContent = `${gitObject.login}`
+  location.textContent = `Location: ${gitObject.location}`
+  profile.textContent = `Profile: ${pageAddress}`
+  pageAddress.href = `${gitObject.html_url}`
+  followers.textContent = `Followers: ${gitObject.followers}`
+  following.textContent = `Following: ${gitObject.following}`
+  bio.textContent = `Bio: ${gitObject.bio}`
+
+}
 /*
   List of LS Instructors Github username's:
     tetondan
